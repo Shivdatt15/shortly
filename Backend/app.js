@@ -22,6 +22,18 @@ app.post("/api/create",(req,res)=>{
    res.send(nanoid(7)); 
 })
 
+app.get("/:id",async (req,res)=>{
+  const {id}=req.params;
+  const url= await urlSchema.findOne({short_Url:id});
+  if(url)
+  {
+    res.redirect(url.full_Url);
+  }
+  else{
+     res.status(404).send("not be found");
+  }
+})
+
 app.listen(3000,()=>{
     connectDB();
     console.log("server is running on port 3000 http://localhost:3000");
