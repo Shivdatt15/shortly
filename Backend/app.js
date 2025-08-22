@@ -11,15 +11,28 @@ import cors from "cors"
 import { attachUser } from "./src/utils/attachUser.js";
 import cookieParser from "cookie-parser"
 
-dotenv.config("./.env"); 
+dotenv.config({ path: "./.env" });
 
 const app=express();
 
 //resourse sharing(data) from frontend to backend
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL
+];
+
 app.use(cors({
-    origin: 'http://localhost:5173', // your React app
-    credentials: true // 👈 this allows cookies to be sent
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
 }));
+
+
 
 //used for parsing 
 app.use(express.json());
@@ -35,7 +48,9 @@ app.get("/:id",redirectFromShortUrl);
 
 app.use(errorHandler);
 
-app.listen(3000,()=>{
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
     connectDB();
-    console.log("server is running on port 3000 http://localhost:3000");
-})
+    console.log(`🚀 Server running on port ${PORT}`);
+});
