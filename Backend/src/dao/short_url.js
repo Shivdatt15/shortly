@@ -10,7 +10,7 @@ export const saveShortUrl=async(shortUrl,longUrl,userId)=>{
             });
             if(userId)
                 {
-                    newUrl.user_id=userId
+                    newUrl.user=userId
                 }
                await newUrl.save();
         }
