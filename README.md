@@ -45,6 +45,3 @@ project screenshots here:
 - Render → Backend
 - MongoDB Atlas
 ---
-📸 Screenshots
-
-Add screenshots of your Login, Dashboard, and URL Shortener UI here.
