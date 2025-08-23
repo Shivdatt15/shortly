@@ -22,17 +22,9 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true
+    origin: process.env.FRONTEND_URL, // Vercel frontend
+    credentials: true,                // allow cookies
 }));
-
-
 
 //used for parsing 
 app.use(express.json());
