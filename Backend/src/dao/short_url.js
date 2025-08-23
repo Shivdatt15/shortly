@@ -14,14 +14,12 @@ export const saveShortUrl=async(shortUrl,longUrl,userId)=>{
                 }
                await newUrl.save();
         }
-        catch(err)
-        {
-            if(error.code == 11000)
-            {
-                throw new ConflictError("ShortURL already exist")
-            }
-            throw new Error(err);
-        }
+      catch (err) {
+    if (err?.code === 11000) {
+        throw new ConflictError("ShortURL already exist");
+    }
+    throw err;
+}
 }
 
 export const getShortUrl = async (shortUrl)=>{
