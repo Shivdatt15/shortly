@@ -12,8 +12,10 @@ const UserUrl = () => {
 
   const [copiedId, setCopiedId] = useState(null)
 
-  const handleCopy = (url, id) => {
-    navigator.clipboard.writeText(url)
+  const FRONTEND_URL = import.meta.env.VITE_FRONTEND_URL
+
+  const handleCopy = (shortUrl, id) => {
+    navigator.clipboard.writeText(`${FRONTEND_URL}/${shortUrl}`)
     setCopiedId(id)
     setTimeout(() => setCopiedId(null), 2000)
   }
@@ -77,12 +79,12 @@ const UserUrl = () => {
                 <td className="px-6 py-4">
                   <div className="text-sm">
                     <a 
-                      href={`http://localhost:3000/${url.short_Url}`} 
+                      href={`${FRONTEND_URL}/${url.short_Url}`} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-lime-400 hover:text-lime-300 hover:underline"
                     >
-                      {`localhost:3000/${url.short_Url}`}
+                      {`${FRONTEND_URL}/${url.short_Url}`}
                     </a>
                   </div>
                 </td>
@@ -95,7 +97,7 @@ const UserUrl = () => {
                 </td>
                 <td className="px-6 py-4 text-sm font-medium">
                   <button
-                    onClick={() => handleCopy(`http://localhost:3000/${url.short_Url}`, url._id)}
+                    onClick={() => handleCopy(url.short_Url, url._id)}
                     className={`inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md shadow-sm ${
                       copiedId === url._id
                         ? 'bg-green-600 text-white hover:bg-green-700'
