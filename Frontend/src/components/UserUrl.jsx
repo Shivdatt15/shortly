@@ -12,10 +12,10 @@ const UserUrl = () => {
 
   const [copiedId, setCopiedId] = useState(null)
 
-  const FRONTEND_URL = import.meta.env.VITE_FRONTEND_URL
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
   const handleCopy = (shortUrl, id) => {
-    navigator.clipboard.writeText(`${FRONTEND_URL}/${shortUrl}`)
+    navigator.clipboard.writeText(`${BACKEND_URL}/${shortUrl}`)
     setCopiedId(id)
     setTimeout(() => setCopiedId(null), 2000)
   }
@@ -79,12 +79,12 @@ const UserUrl = () => {
                 <td className="px-6 py-4">
                   <div className="text-sm">
                     <a 
-                      href={`${FRONTEND_URL}/${url.short_Url}`} 
+                      href={`${BACKEND_URL}/${url.short_Url}`} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-lime-400 hover:text-lime-300 hover:underline"
                     >
-                      {`${FRONTEND_URL}/${url.short_Url}`}
+                      {`${BACKEND_URL}/${url.short_Url}`}
                     </a>
                   </div>
                 </td>
